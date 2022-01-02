@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eddie Murphy - Party All The Time Converter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        height: 100vh;
+        margin: 0;
+      }
+      .allfather-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('party-all.gif');
+      }
+      .container {
+        display: flex;
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 10px 10px 0 0;
+      }
+      .box {
+        display: flex;
+        flex-flow: column;
+        justify-content: end;
+        padding: 10px;
+      }
+      .box .text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        font-size: 34px;
+        padding: 10px;
+      }
+      .box .title {
+        font-size: 24px;
+        font-weight: 600;
+        padding-bottom: 10px;
+        color: #484650;
+      }
+      .audio {
+        width: 100%;
+      }
+    </style>
+</head>
+<body class="allfather-container">
+    <div id="app">
+      <div class="container">
+        <div class="box">
+          <span class="title">Eddie Murphy - Party All The Time</span>
+          <input class="text" type="text" name="partyAllTheTime" @input="convertToSeconds" v-model="partyAllTheTime"/>
+        </div>
+        <div class="box">
+          <div class="title">&nbsp;</div>
+          <div class="text">=</div>
+        </div>
+        <div class="box">
+          <span class="title">Seconds</span>
+          <input class="text" type="text" name="seconds" @input="convertToPartyAllTheTime" v-model="seconds"/>
+        </div>
+      </div>
+      <audio class="audio" controls autoplay loop>
+        <source src="Eddie Murphy - Party All The Time.m4a" type="audio/mp4">
+      </audio>
+    </div>
+
+    <script type="text/javascript">
+        const PARTY_ALL_THE_TIME_LENGTH = 256;
+        var app = new Vue({
+          el: '#app',
+          data: {
+            partyAllTheTime: 1,
+            seconds: PARTY_ALL_THE_TIME_LENGTH,
+          },
+          methods: {
+            convertToPartyAllTheTime: function () {
+              const amount = this.seconds / PARTY_ALL_THE_TIME_LENGTH;
+              this.partyAllTheTime = this.getPrettyFormat(amount);
+            },
+            convertToSeconds: function () {
+              const amount = this.partyAllTheTime * PARTY_ALL_THE_TIME_LENGTH;
+              this.seconds = this.getPrettyFormat(amount);
+            },
+            getPrettyFormat(amount) {
+              amount = parseFloat(amount);
+              return amount % 1 == 0 ? amount : +amount.toFixed(4);
+            }
+          }
+        });
+    </script>
+</body>
+</html>
